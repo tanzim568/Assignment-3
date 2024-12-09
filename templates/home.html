@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<!-- this page will work as show task url -->
+
+<!-- card started -->
+<!-- <div class="border border-warning container row mx-auto text-center d-flex"> -->
+<div class=" d-flex  justify-content-center mx-auto gap-2 flex-wrap text-center" style="width: 80%">
+  {% for post in posts %}
+
+  <div class="card  mx-3 my-4 " style="width: 18rem;">
+    <div class="card-body ">
+      <h6 class="card-subtitle mb-2 text-body-secondary">Task Id :{{post.id}}</h6>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Assigned date :{{post.Task_Assign_data}}</h6>
+      <h5 class="card-title">{{post.taskTitle}}</h5>
+
+      <p class="card-text">{{post.taskDescription}}</p>
+      <p class="m-1">Categories:
+        {% for cats in post.categories.all %}
+        <span class="card-text btn btn-warning btn-sm my-1"> {{cats}}</span>
+        {%endfor%}
+      </p>
+      {% if post.is_completed %}
+      <p class="card-text"><strong>Completed</strong></p>
+      {%endif%}
+      <!-- categories -->
+       <!-- have to add catagories many to many fields in taskmodel manytomany task category -->
+       <!-- {%for categories in post.category_name.all%}
+      <p class="card-text">{{categories}}</p>
+      {%endfor%} -->
+        <!-- AI test -->
+
+
+<p class="my-auto justify-content-center">
+  
+  <a href="{% url 'edit_task' post.id %}" class="card-link btn btn-primary ">Edit</a>
+  <a href="{%url 'delete_task' post.id %}" class="card-link btn btn-danger">Delete</a>
+</p>
+    </div>
+  </div>
+
+  {%endfor%}
+</div>
+
+
+
+{%endblock%}
